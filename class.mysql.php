@@ -1,47 +1,53 @@
 <?php
+/*
+ * @internal php5-mysqli
+ * @author eft0 <esteban@fernandez.cl>
+ * @version 2.0
+ */
 class MySQL 
 {	
-	private $conn;
+	private static $conn;
 	
 	function __construct($host, $user, $pass, $db = false)
 	{	
-		$this->conn = mysql_connect($host, $user, $pass);
-		mysql_select_db($db, $this->conn);
-		return $this->conn;
+		self::$conn = mysqli_connect($host, $user, $pass, $db);
+		if (mysqli_connect_errno())
+			  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+		else
+			return $this->conn;
 	}	
 	
-	public function query($query)
+	public static function query($query)
 	{
-		$result = mysql_query($query);
-		if (mysql_error()) {
+		$result = mysqli_query(self::$conn, $query);
+		if (!$result) {
 			echo "<pre>" . $query . "</pre>";
-			die (mysql_errno() . ":" . mysql_error());
+			die (mysqli_error(self::$conn) ." ". mysqli_errno(self::$conn));
 		} else {		
 			return $result;
 		}
 	}
 	
-	public function affected_rows()
+	public static function affected_rows()
 	{
-		return mysql_affected_rows($this->conn);
+		return mysqli_affected_rows(self::$conn);
 	}
 	
-	public function fetch_object($result)
+	public static function fetch_object($result)
 	{
-		$data = mysql_fetch_object($result);
+		$data = mysqli_fetch_object($result);
 		return $data;
 	}
 	
-	
-	public function last_id($result) {
-		return mysql_insert_id($this->conn);
+	public static function last_id($result) {
+		return mysqli_insert_id(self::$conn);
 	}
 	
 	function __destruct()
 	{
-		if ($this->conn) {
-			mysql_close($this->conn);
+		if (self::$conn) {
+			mysqli_close(self::$conn);
 		}
-	}
+	}	
 }
 ?>
