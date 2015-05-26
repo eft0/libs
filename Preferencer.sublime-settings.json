@@ -1,0 +1,29 @@
+{
+  "coffee_path": "/usr/local/lib/node_modules/coffee-script/bin",
+  "color_scheme": "Packages/Theme - Cyanide/Monocyanide - Black.tmTheme",
+  "icon_file_type_enable": true,
+  "ignored_packages":
+  [
+    "Vintage"
+  ],
+  "indent_guide_options":
+  [
+    "draw_normal",
+    "draw_active"
+  ],
+  "keys":
+  [
+    "ctrl+shift+t"
+  ],
+  "node_path": "/usr/local/bin",
+  "spacefunk_folder_icons": true,
+  "trailing_spaces_trim_on_save": true,
+  "command": "delete_trailing_spaces",
+  "draw_indent_guides": true,
+  "draw_white_space": "all",
+  "tab_size": 2,
+  "rulers": [80],
+  "terminal": "iterm",
+  "translate_tabs_to_spaces": true,
+  "word_wrap": false
+}
